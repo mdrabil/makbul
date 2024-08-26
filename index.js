@@ -31,7 +31,7 @@ mongoose.connect(process.env.URL).then(()=>{
 
 
 
-app.post('/api/signup',async(req,res)=>{
+app.post('/signup',async(req,res)=>{
     const {name,email,password} = req.body ;
 console.log(name)
 try {
@@ -48,7 +48,7 @@ try {
 
 })
 
-app.post('/api/createblog', async (req, res) => {
+app.post('/createblog', async (req, res) => {
     try {
       const { post, username } = req.body;
       const newBlog = new Blog({ post, username });
@@ -62,7 +62,7 @@ app.post('/api/createblog', async (req, res) => {
 
 
 
-app.get('/api/readblog', async (req, res) => {
+app.get('/readblog', async (req, res) => {
   try {
     const blogs = await Blog.find({});
     res.status(200).json(blogs);
@@ -72,7 +72,7 @@ app.get('/api/readblog', async (req, res) => {
   }
 });
 
-app.post('/api/:id/like', async (req, res) => {
+app.post('/:id/like', async (req, res) => {
     try {
       const postId = req.params.id;
       const post = await Blog.findByIdAndUpdate(postId, { $inc: { likes: 1 } }, { new: true });
@@ -87,7 +87,7 @@ app.post('/api/:id/like', async (req, res) => {
   });
   
   // Dislike a blog post
-  app.post('/api/:id/dislike', async (req, res) => {
+  app.post('/:id/dislike', async (req, res) => {
     try {
       const postId = req.params.id;
       const post = await Blog.findByIdAndUpdate(postId, { $inc: { dislikes: 1 } }, { new: true });
@@ -102,7 +102,7 @@ app.post('/api/:id/like', async (req, res) => {
   });
   
   // Add a comment to a blog post
-  app.post('/api/:id/comment', async (req, res) => {
+  app.post('/:id/comment', async (req, res) => {
     try {
       const postId = req.params.id;
       const { content, author } = req.body;
@@ -118,7 +118,7 @@ app.post('/api/:id/like', async (req, res) => {
   });
   
   // Get comments for a blog post
-  app.get('/api/:id/comment', async (req, res) => {
+  app.get('/:id/comment', async (req, res) => {
     try {
       const postId = req.params.id;
       const post = await Blog.findById(postId);
@@ -136,7 +136,7 @@ app.post('/api/:id/like', async (req, res) => {
 
 
 
-app.get('/api/:postId/comment', async (req, res) => {
+app.get('/:postId/comment', async (req, res) => {
     try {
       const { postId } = req.params;
       const comments = await Comment.find({ postId });
@@ -147,7 +147,7 @@ app.get('/api/:postId/comment', async (req, res) => {
   });
   
   // Add a new comment to a specific post
-  app.post('/api/:postId/comment', async (req, res) => {
+  app.post('/:postId/comment', async (req, res) => {
     try {
       const { postId } = req.params;
       const { text } = req.body;
@@ -165,7 +165,7 @@ app.get('/api/:postId/comment', async (req, res) => {
     }
   });
 
-  app.put('/api/updateblog/:id', async (req, res) => {
+  app.put('/updateblog/:id', async (req, res) => {
     try {
       const updatedPost = await Blog.findByIdAndUpdate(req.params.id, req.body, { new: true });
       res.json(updatedPost);
@@ -175,7 +175,7 @@ app.get('/api/:postId/comment', async (req, res) => {
   });
   
   // Delete a post
-  app.delete('/api/deleteblog/:id', async (req, res) => {
+  app.delete('/deleteblog/:id', async (req, res) => {
     try {
       await Blog.findByIdAndDelete(req.params.id);
       res.json({ message: 'Post deleted' });
@@ -183,7 +183,7 @@ app.get('/api/:postId/comment', async (req, res) => {
       res.status(500).json({ message: err.message });
     }
   });
-  app.get('/api/getone/:id', async (req, res) => {
+  app.get('/getone/:id', async (req, res) => {
     try {
       const post = await Blog.findById(req.params.id);
 
