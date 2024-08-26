@@ -7,13 +7,20 @@ import User from "./models/usermodel.js";
 import Blog from "./models/postmodel.js";
 import Comment from "./models/commentmodel.js";
 dotenv.config()
-const url = process.env.URL
 
 const port = process.env.PORT || 8000 
 const app = express()
-app.use(cors())
+app.get('/',(req,res)=>{
+  res.send("nice")
+})
+app.use(cors(
+  {
+    origin:['https://deenkibaatein.vercel.app'],
+    methods:['GET','POST','PUT','DELETE'],
+    credentials:true
+  }
+))
 app.use(bodyParser.json())
-
 
 
 app.post('/api/signup',async(req,res)=>{
@@ -182,7 +189,8 @@ app.get('/api/:postId/comment', async (req, res) => {
     }
   });
 
-mongoose.connect(url).then(()=>{
+
+mongoose.connect(process.env.URL).then(()=>{
     console.log("mongodb connect")
 }).catch(()=>{
     console.log("DB not connect")
@@ -191,3 +199,6 @@ mongoose.connect(url).then(()=>{
 app.listen(port,()=>{
     console.log("server is running", port)
 })
+
+
+
