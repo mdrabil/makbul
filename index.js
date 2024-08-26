@@ -22,6 +22,14 @@ app.use(cors(
 ))
 app.use(bodyParser.json())
 
+mongoose.connect(process.env.URL).then(()=>{
+  console.log("mongodb connect")
+}).catch(()=>{
+  console.log("DB not connect")
+})
+
+
+
 
 app.post('/api/signup',async(req,res)=>{
     const {name,email,password} = req.body ;
@@ -190,11 +198,7 @@ app.get('/api/:postId/comment', async (req, res) => {
   });
 
 
-mongoose.connect(process.env.URL).then(()=>{
-    console.log("mongodb connect")
-}).catch(()=>{
-    console.log("DB not connect")
-})
+
 
 app.listen(port,()=>{
     console.log("server is running", port)
