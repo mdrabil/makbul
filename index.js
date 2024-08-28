@@ -62,7 +62,7 @@ app.post('/createblog', async (req, res) => {
 
 
 
-app.get('/readblog', async (req, res) => {
+app.get('readblog', async (req, res) => {
   try {
     const blogs = await Blog.find({});
     res.status(200).json(blogs);
