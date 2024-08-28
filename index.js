@@ -8,7 +8,7 @@ import Blog from "./models/postmodel.js";
 import Comment from "./models/commentmodel.js";
 dotenv.config()
 
-const port = process.env.PORT || 8000 
+const port = process.env.PORT || 8080
 const app = express()
 app.get('/',(req,res)=>{
   res.send("nice")
