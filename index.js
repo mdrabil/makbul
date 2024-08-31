@@ -16,7 +16,7 @@ app.get('/',(req,res)=>{
 app.use(cors(
   {
     origin:['https://deenkibaatein.vercel.app'],
-    
+
     methods:['GET','POST','PUT','DELETE'],
     credentials:true
   }
@@ -28,6 +28,7 @@ mongoose.connect(process.env.URL).then(()=>{
 }).catch(()=>{
   console.log("DB not connect")
 })
+
 
 
 
