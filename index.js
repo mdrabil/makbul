@@ -16,6 +16,7 @@ app.get('/',(req,res)=>{
 app.use(cors(
   {
     origin:['https://deenkibaatein.vercel.app'],
+    
     methods:['GET','POST','PUT','DELETE'],
     credentials:true
   }
