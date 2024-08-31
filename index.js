@@ -33,6 +33,7 @@ mongoose.connect(process.env.URL).then(()=>{
 
 
 
+
 app.post('/signup',async(req,res)=>{
     const {name,email,password} = req.body ;
 console.log(name)
