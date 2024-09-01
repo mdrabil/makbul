@@ -206,7 +206,7 @@ app.get('/:postId/comment', async (req, res) => {
 
 
 app.listen(port,()=>{
-    console.log("server is running", port)
+    console.log("server is running", process.env.PORT)
 })
 
 
